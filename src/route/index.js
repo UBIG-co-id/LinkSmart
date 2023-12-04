@@ -53,7 +53,8 @@ import PembayaranManual from '../pages/Pembayaran/PembayaranManual';
 import HistoryPembayaran from '../pages/Pembayaran/HistoryPembayaran';
 import DataPengguna from '../pages/Pengaturan/DataPengguna';
 import Profile from '../pages/Pengaturan/Profile';
-
+import AddKkm from '../component/modal/kkm/AddModal'
+ 
 const Router = () => {
   const location = useLocation();
   useLayoutEffect(() => {
@@ -63,13 +64,17 @@ const Router = () => {
     <Routes>
       <Route path={`${process.env.PUBLIC_URL}`} element={<Layout />}>
         <Route path='/dashboard' element={<Dashboard />}></Route>
-
+        {/* PEGAWAI */}
         <Route element={<UserContextProvider />}>
           <Route path='/pegawai' element={<Pegawai />}></Route>
-          <Route path='/pegawai/mutasi-ptk' element={<PTK />}></Route>
           <Route path='/pegawai/add-pegawai' element={<AddPegawai />}></Route>
-          <Route path='/pegawai/add-mutasi' element={<AddMutasi />}></Route>
         </Route>
+        {/* END PEGAWAI */}
+
+        {/* MUTASI PTK */}
+        <Route path='/pegawai/mutasi-ptk' element={<PTK />}></Route>
+        <Route path='/pegawai/add-mutasi' element={<AddMutasi />}></Route>
+        {/* END MUTASI PTK */}
 
         <Route path='/kelas/ruang' element={<RuangKelas />}></Route>
         <Route path='/kelas/Kenaikan-kelas' element={<KenaikanKelas />}></Route>
@@ -81,14 +86,17 @@ const Router = () => {
         {/* PRESENSI */}
         {/* <Route path='/presensi/siswa' element={<PresensiSiswa />}></Route> */}
         {/* END PRESENSI */}
+        {/* KKM MAPEL */}
+        <Route path='/rapor/mapel-kkm' element={<Kkm />}></Route>
+        <Route path='/rapor/add-kkm' element={<AddKkm/>}></Route>
+        {/* KKM MAPEL */}
 
         {/* RAPOR */}
         <Route path='/rapor/mapel' element={<Mapel />}></Route>
         <Route path='/rapor/mapel-kelas' element={<MapelKelas />}></Route>
-        <Route path='/rapor/mapel-kkm' element={<Kkm />}></Route>
-        <Route path='/presensi/siswa' element={<PresensiSiswa/>}></Route>
-        <Route path='/presensi/pegawai' element={<PresensiPegawai/>}></Route>
-        <Route path='/presensi/siswa-manual' element={<PresensiSiswaManual/>}></Route>
+        <Route path='/presensi/siswa' element={<PresensiSiswa />}></Route>
+        <Route path='/presensi/pegawai' element={<PresensiPegawai />}></Route>
+        <Route path='/presensi/siswa-manual' element={<PresensiSiswaManual />}></Route>
         <Route path='/rapor/penilaian-aspek' element={<PenilaianAspek />}></Route>
         <Route path='/rapor/penilaian-kd' element={<PenilaianKd />}></Route>
         <Route path='/rapor/penilaian-sikap' element={<PenilaianSikap />}></Route>
@@ -98,9 +106,9 @@ const Router = () => {
         <Route path='/rapor/setting-tampilkan' element={<TampilanRapor />}></Route>
         <Route path='/rapor/setting-rentang' element={<RentangNilai />}></Route>
         <Route path='/rapor/penilaian-kkm-batas' element={<KkmBatas />}></Route>
-        <Route path='/rapor/kurikulum' element={<RaporKurikulum/>}></Route>
-        <Route path='/rapor/rekap-nilai' element={<RekapNilai/>}></Route>
-        <Route path='/rapor/cetak-cover' element={<Cover/>}></Route>
+        <Route path='/rapor/kurikulum' element={<RaporKurikulum />}></Route>
+        <Route path='/rapor/rekap-nilai' element={<RekapNilai />}></Route>
+        <Route path='/rapor/cetak-cover' element={<Cover />}></Route>
         {/* END RAPOR */}
 
         {/* PEMBAYARAN */}
@@ -108,7 +116,7 @@ const Router = () => {
         <Route path='/pembayaran/spp' element={<TagihanSpp />}></Route>
         <Route path='/pembayaran/kustom-spp' element={<KustomSppSiswa />}></Route>
         <Route path='/pembayaran/bayar-tagihan' element={<PembayaranManual />}></Route>
-        <Route path='/pembayaran/histori-pembayaran' element={<HistoryPembayaran/>}></Route>
+        <Route path='/pembayaran/histori-pembayaran' element={<HistoryPembayaran />}></Route>
         {/* END PEMBAYARAN */}
 
         {/* PENGUMUMAN */}
@@ -126,7 +134,7 @@ const Router = () => {
         {/* END LAPORAN */}
 
         {/* PENGATURAN */}
-        <Route path='/pengaturan/identitas' element={<Identitas/>}></Route>
+        <Route path='/pengaturan/identitas' element={<Identitas />}></Route>
         {/* PENGATURAN */}
         {/* PENILAIAN */}
         <Route path='/penilaian/pengetahuan' element={<Pengetahuan />}></Route>

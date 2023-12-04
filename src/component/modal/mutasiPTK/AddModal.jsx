@@ -27,8 +27,8 @@ import { UserContext } from '../../user/UserContext';
 
 const AddModal = ({ modal, closeModal, onSubmit,  filterStatus, filterPtk, filterThn }) => {
   const [files4, setFiles4] = useState([]);
-  const { contextData } = useContext(UserContext);
-    const [data, setData] = contextData;
+  // const { contextData } = useContext(UserContext);
+  //   const [data, setData] = contextData;
   const [defaultFiles, setDefaultFiles] = useState("");
   const [formData, setFormData] = useState({
     tgl: "",
@@ -67,7 +67,7 @@ const AddModal = ({ modal, closeModal, onSubmit,  filterStatus, filterPtk, filte
   const onFormSubmit = (submitData) => {
     const { tgl, nama, jm, tahun, alasan } = submitData;
     let submittedData = {
-        id: data.length + 1,
+        // id: data.length + 1,
         tgl: tgl,
         ptk: nama,
         jm: jm,
@@ -75,7 +75,7 @@ const AddModal = ({ modal, closeModal, onSubmit,  filterStatus, filterPtk, filte
         alasan: alasan,
         file: null,
     };
-    setData([submittedData, ...data]);
+    // setData([submittedData, ...data]);
     resetForm();
     // setModal({ edit: false }, { add: false });
 };

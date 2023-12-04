@@ -23,8 +23,9 @@ import Head from '../../../layout/Head';
 import Content from '../../../layout/Content/Content';
 import { filterStatus, filterJk } from '../../../component/user/UserData';
 // import { Navigate } from 'react-router-dom';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, } from 'react-router-dom';
 import { useFormik } from 'formik';
+// import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 const AddModal = () => {
   const navigate = useNavigate('');
@@ -35,6 +36,8 @@ const AddModal = () => {
     // Update the formik values with the accepted files
     formik.setFieldValue('foto', acceptedFiles);
   };
+  
+
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
   
   const formik = useFormik({
@@ -72,31 +75,34 @@ const AddModal = () => {
 
       const token = localStorage.getItem('jwtToken');
       fetch(`https://linksmart-1-t2560421.deta.app/ptk-tambah`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          if (data.message === 'data berhasil ditambah') {
-            setSubmissionSuccess(true); // Setelah data berhasil ditambah, setSubmissionSuccess menjadi true
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+  },
+  body: formData,
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    if (data.message === 'data berhasil ditambah') {
+      // Remove the setSubmissionSuccess line
+      // navigate(); // Replace this line with the one below
+      navigate('/pegawai'); // Redirect to /pegawai using the navigate function
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
     }, 
   });
   
-  useEffect(() => {
-    if (submissionSuccess) {
-      alert('Data berhasil ditambah');
-      navigate('/pegawai');
-    }
-  }, [submissionSuccess, navigate]);
+  // useEffect(() => {
+  //   if (submissionSuccess) {
+  //     alert('Data berhasil ditambah');
+  //     navigate('/pegawai');
+  //   }
+  // }, [submissionSuccess, navigate]);
 
   return (
     <React.Fragment>

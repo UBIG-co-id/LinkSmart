@@ -4,7 +4,7 @@ import Head from '../../layout/Head'
 import { Row, Block, BlockHead, BlockBetween, BlockHeadContent, BlockTitle, BlockDes, Button, Icon, SpecialTable, DataTable, RSelect, TooltipComponent, PaginationComponent } from '../../component/Component'
 import { Card, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap'
 import { bulkActionOptions } from '../../utils/Utils'
-import { UserContext } from '../../component/user/UserContext'
+// import { UserContext } from '../../component/user/UserContext'
 import { userData, filterPtk, filterStatus, filterThn, filterBln } from '../../component/user/UserData'
 import { DataTableBody, DataTableHead, DataTableItem, DataTableRow } from '../../component/table/DataTable'
 import EditModal from '../../component/modal/mutasiPTK/EditModal'
@@ -12,7 +12,7 @@ import AddModal from '../../component/modal/mutasiPTK/AddModal'
 import { Link } from 'react-router-dom'
 
 const Pegawai = () => {
-    const [data, setData] = useState(userData);
+    const [data, setData] = useState([]);
     const [sm, updateSm] = useState(false);
     const [onSearch, setonSearch] = useState(true);
     const [onSearchText, setSearchText] = useState("");
@@ -39,7 +39,7 @@ const Pegawai = () => {
         newData[index].status = "Rejected";
         setData([...newData]);
     };
-    
+
     const [currentPage, setCurrentPage] = useState(1);
     const [itemPerPage, setItemPerPage] = useState(10);
     const indexOfLastItem = currentPage * itemPerPage;
@@ -282,11 +282,13 @@ const Pegawai = () => {
                                                 <Icon name="plus"></Icon>
                                         </li> */}
                                         <li >
-                                            <Button color="primary" onClick={() => setModal({ add: true })}>
-                                                <Icon name="plus">
-                                                </Icon>
-                                                <div>Tambah Mutasi </div>
-                                            </Button>
+                                           <Link to="/pegawai/add-mutasi">
+                                                <Button color="primary">
+                                                    <Icon name="plus">
+                                                    </Icon>
+                                                    {/* <div>Tambah PTK </div> */}
+                                                </Button>
+                                            </Link>
                                             {/* </Link> */}
                                         </li>
                                     </ul>
