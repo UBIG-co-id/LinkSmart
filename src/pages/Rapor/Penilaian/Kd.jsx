@@ -18,9 +18,9 @@ const Kd = () => {
     const indexOfFirstItem = indexOfLastItem - itemPerPage;
     const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-    const toggle = () => setonSearch(!onSearch);
+    const [onSearch, setonSearch] = useState(true);
     const [onSearchText, setSearchText] = useState("");
-    const [onSearch, setonSearch] = useState(false);
+    const toggle = () => setonSearch(!onSearch);
 
     const onApproveClick = (id) => {
         let newData = data;

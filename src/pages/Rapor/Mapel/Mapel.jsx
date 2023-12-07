@@ -9,10 +9,11 @@ import { mapel } from '../../../component/user/UserData'
 const Mapel = () => {
     const [data, setData] = useState(mapel);
     const [sm, updateSm] = useState(false);
-    const [onSearch, setonSearch] = useState(false);
+    const [onSearch, setonSearch] = useState(true);
     const [onSearchText, setSearchText] = useState("");
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
     const toggle = () => setonSearch(!onSearch);
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    
     const [modal, setModal] = useState({
         edit: false,
         add: false,
@@ -56,6 +57,7 @@ const Mapel = () => {
     const onFilterChange = (e) => {
         setSearchText(e.target.value);
     };
+
     const [editId, setEditedId] = useState();
     const [FormData, setFormData] = useState({
         mapel: "",
@@ -67,8 +69,8 @@ const Mapel = () => {
     // });
     const resetForm = () => {
         setFormData({
-        mapel: "",
-        singkat: "",  
+            mapel: "",
+            singkat: "",
         });
     };
     const closeModal = () => {
@@ -81,7 +83,7 @@ const Mapel = () => {
     }
     const onFormSubmit = (submitData) => {
         console.log(submitData);
-        const { mapel, singkat} = submitData;
+        const { mapel, singkat } = submitData;
         let submittedData = {
             id: data.length + 1,
             mapel: mapel,
@@ -89,7 +91,7 @@ const Mapel = () => {
         };
         setData([submittedData, ...data]);
         resetForm();
-        setModal({ edit: false , add: false });
+        setModal({ edit: false, add: false });
     };
 
     // const onEditSubmit = (submitData) => {
@@ -172,25 +174,25 @@ const Mapel = () => {
                     <DataTable className="card-stretch">
                         <div className="card-inner position-relative card-tools-toggle">
                             <div className="card-title-group">
-                            {/* <div className="card-title">
-                                    <h5 className="title">Tambah Mata Pelajaran </h5>
-                                </div> */}
+                                <div className="card-title">
+                                    {/* <h5 className="title">Tambah Mata Pelajaran </h5> */}
+                                </div>
                                 <div className="card-tools">
                                     <div className="form-inline flex-nowrap gx-3">
                                         <ul className="btn-toolbar gx-1">
                                             <li>
-                                            <Button
-                                                href="#search"
-                                                onClick={(ev) => {
-                                                    ev.preventDefault();
-                                                    toggle();
-                                                }}
-                                                className="btn-icon search-toggle toggle-search"
-                                            >
-                                                <Icon name="search"></Icon>
-                                            </Button>
+                                                <Button
+                                                    href="#search"
+                                                    onClick={(ev) => {
+                                                        ev.preventDefault();
+                                                        toggle();
+                                                    }}
+                                                    className="btn-icon search-toggle toggle-search"
+                                                >
+                                                    <Icon name="search"></Icon>
+                                                </Button>
                                             </li>
-                                            <li className="btn-toolbar-sep"></li>
+                                            {/* <li className="btn-toolbar-sep"></li> */}
                                             <li>
                                                 <UncontrolledDropdown>
                                                     <DropdownToggle tag="a" className="btn btn-trigger btn-icon dropdown-toggle">
@@ -201,31 +203,27 @@ const Mapel = () => {
                                             </li>
                                         </ul>
                                         <div className={`card-search search-wrap ${!onSearch && "active"}`}>
-                                    <div className="search-content">
-                                        <Button
-                                            onClick={() => {
-                                                setSearchText("");
-                                                toggle();
-                                            }}
-                                            className="search-back btn-icon toggle-search"
-                                        >
-                                            <Icon name="arrow-left"></Icon>
-                                        </Button>
-                                        <input
-                                            type="text"
-                                            className="border-transparent form-focus-none form-control"
-                                            placeholder="Search by Order Id"
-                                            value={onSearchText}
-                                            onChange={(e) => onFilterChange(e)}
-                                        />
-                                        <Button className="search-submit btn-icon">
-                                            <Icon name="search"></Icon>
-                                        </Button>
-                                    </div>
-                                            <div className="form-inline flex-nowrap gx-3">
-
+                                            <div className="search-content">
+                                                <Button
+                                                    onClick={() => {
+                                                        setSearchText("");
+                                                        toggle();
+                                                    }}
+                                                    className="search-back btn-icon toggle-search"
+                                                >
+                                                    <Icon name="arrow-left"></Icon>
+                                                </Button>
+                                                <input
+                                                    type="text"
+                                                    className="border-transparent form-focus-none form-control"
+                                                    placeholder="Search by Order Id"
+                                                    value={onSearchText}
+                                                    onChange={(e) => onFilterChange(e)}
+                                                />
+                                                <Button className="search-submit btn-icon">
+                                                    <Icon name="search"></Icon>
+                                                </Button>
                                             </div>
-                                    
                                         </div>
                                     </div>
                                 </div>
@@ -271,7 +269,7 @@ const Mapel = () => {
                                                         text="Details"
                                                     />
 
-                                                    
+
                                                     <li className="" onClick={() => onApproveClick(item.id)}>
                                                         <TooltipComponent
                                                             tag="a"
@@ -314,7 +312,7 @@ const Mapel = () => {
                         </div>
                     </DataTable>
                 </Block>
-                <AddModal modal={modal.add} FormData={FormData} setFormData={setFormData} closeModal={closeModal} onSubmit={onFormSubmit}/>
+                <AddModal modal={modal.add} FormData={FormData} setFormData={setFormData} closeModal={closeModal} onSubmit={onFormSubmit} />
             </Content>
         </React.Fragment>
     )

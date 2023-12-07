@@ -39,7 +39,7 @@ const Kkm = () => {
         setSearchText(e.target.value);
     };
     const [editId, setEditedId] = useState();
-    const [editFormData, setFormData] = useState({
+    const [FormData, setFormData] = useState({
         mapel: "",
         kelas: "",
         kkm: "",
@@ -159,7 +159,6 @@ const Kkm = () => {
                                     <h5 className="title">KKM </h5>
                                 </div>
                                 <div className="card-tools me-n1">
-                                    
                                     <ul>
                                         <li >
                                             <Link to='/rapor/add-kkm'>

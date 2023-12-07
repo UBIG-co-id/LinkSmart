@@ -3,7 +3,7 @@ import Content from '../../../layout/Content/Content'
 import Head from '../../../layout/Head'
 import { Card, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap'
 // import { UserContext } from '../../component/user/UserContext'
-import AddModal from '../../../component/modal/klsmapel/AddModal'
+// import AddModal from '../../../component/modal/klsmapel/AddModal'
 import {
     Block,
     BlockHead,
@@ -20,6 +20,7 @@ import {
 } from '../../../component/Component'
 import { DataTableBody, DataTableHead, DataTableItem, DataTableRow } from '../../../component/table/DataTable'
 import { mapelKelas } from '../../../component/user/UserData'
+import AddModal from '../../../component/modal/klsmapel/AddModal'
 const Kelas = () => {
     const [data, setData] = useState(mapelKelas);
     const [sm, updateSm] = useState(false);
@@ -50,6 +51,7 @@ const Kelas = () => {
     };
     const [modal, setModal] = useState({
         edit: false,
+        // top: false,
         add: false,
     });
     const [editId, setEditedId] = useState();
@@ -78,8 +80,8 @@ const Kelas = () => {
 
     const onFormSubmit = (submitData) => {
         const { kls, mapel } = submitData;
-        let submittedData = { 
-            id:  data.length + 1,
+        let submittedData = {
+            id: data.length + 1,
             kls: kls,
             mapel: mapel,
         };
@@ -111,13 +113,13 @@ const Kelas = () => {
         newitems[index] = submittedData;
         setModal({ edit: false });
     };
-    return(
+    return (
         <React.Fragment>
             <Head title="Kelas"></Head>
             <Content>
                 <BlockHead size="sm">
                     <BlockBetween>
-                    <BlockHeadContent>
+                        <BlockHeadContent>
                             <BlockTitle page tag="h3">
                                 Kelas-Mapel
                             </BlockTitle>
@@ -148,7 +150,7 @@ const Kelas = () => {
                                             </Button>
                                         </li>
                                         <li >
-                                            <Button color="primary"  onClick={() => setModal({ add: true })}>
+                                            <Button color="primary" onClick={() => setModal({ add: true })}>
                                                 <Icon name="plus">
                                                 </Icon>
                                                 <div>Tambah Mata Pelajaran</div>
@@ -164,8 +166,94 @@ const Kelas = () => {
                     <DataTable className="card-stretch">
                         <div className="card-inner">
                             <div className="card-title-group">
+                                <div className="card-title">
+                                    <h5 className="title">Kelas</h5>
+                                </div>
+                                <div className="card-tools">
+                                    <ul className="nk-block-tools g-3 mr-auto">
+                                        <li>
+                                            <Button color="primary" outline className="btn-dim btn-white">
+                                                <Icon name="download-cloud"></Icon>
+                                                <span>Template Mata Pelajaran-Kelas</span>
+                                            </Button>
+                                        </li>
+                                        <li>
+                                            <Button color="primary" outline className="btn-dim btn-white">
+                                                <Icon name="upload-cloud"></Icon>
+                                                <span>Import Mata Pelajaran-Kelas</span>
+                                            </Button>
+                                        </li>
+                                        <li>
+                                            <Button color="primary" onClick={() => setModal({ add: true })}>
+                                                <Icon name="plus"></Icon>
+                                                <div>Mapel Tahun Sebelumnya</div>
+                                            </Button>
+                                        </li>
+                                    </ul>
+                                    <ul className="btn-toolbar gx-1">
+                                        <li>
+                                            <Button
+                                                href="#search"
+                                                onClick={(ev) => {
+                                                    ev.preventDefault();
+                                                    toggle();
+                                                }}
+                                                className="btn-icon search-toggle toggle-search"
+                                            >
+                                                <Icon name="search"></Icon>
+                                            </Button>
+                                        </li>
+                                        <li className="btn-toolbar-sep"></li>
+                                        <li>
+                                            <UncontrolledDropdown>
+                                                <DropdownToggle tag="a" className="btn btn-trigger btn-icon dropdown-toggle">
+                                                    <div className="dot dot-primary"></div>
+                                                    <Icon name="filter-alt"></Icon>
+                                                </DropdownToggle>
+                                            </UncontrolledDropdown>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+
+
+                                <div className={`card-search search-wrap ${!onSearch && "active"}`}>
+                                    <div className="search-content">
+                                        <Button
+                                            onClick={() => {
+                                                setSearchText("");
+                                                toggle();
+                                            }}
+                                            className="search-back btn-icon toggle-search"
+                                        >
+                                            <Icon name="arrow-left"></Icon>
+                                        </Button>
+                                        <input
+                                            type="text"
+                                            className="border-transparent form-focus-none form-control"
+                                            placeholder="Search by Order Id"
+                                            value={onSearchText}
+                                            onChange={() => onFilterChange()}
+                                        />
+                                        <Button className="search-submit btn-icon">
+                                            <Icon name="search"></Icon>
+                                        </Button>
+                                    </div>
+
+                                </div>
+                                <div className="form-inline flex-nowrap gx-3">
+
+                                </div>
+                            </div>
+                        </div>
+                        {/* <div className="card-inner">
+                            <div className="card-title-group">
+                                <div className="card-title">
+                                    <h5 className="title">KKM </h5>
+                                </div>
                                 <div className="card-tools me-n1">
-                                <ul className="nk-block-tools g-3">
+                                    <ul className="nk-block-tools g-3">
                                         <li>
                                             <Button color="primary" outline className="btn-dim btn-white">
                                                 <Icon name="download-cloud"></Icon>
@@ -179,7 +267,7 @@ const Kelas = () => {
                                             </Button>
                                         </li>
                                         <li >
-                                            <Button color="primary"  onClick={() => setModal({ add: true })}>
+                                            <Button color="primary" onClick={() => setModal({ add: true })}>
                                                 <Icon name="plus">
                                                 </Icon>
                                                 <div>Mapel Tahun Sebelumnya</div>
@@ -208,38 +296,39 @@ const Kelas = () => {
                                                 </DropdownToggle>
                                             </UncontrolledDropdown>
                                         </li>
-                                        </ul>
-                                        <div className={`card-search search-wrap ${!onSearch && "active"}`}>
-                                    <div className="search-content">
-                                        <Button
-                                            onClick={() => {
-                                                setSearchText("");
-                                                toggle();
-                                            }}
-                                            className="search-back btn-icon toggle-search"
-                                        >
-                                            <Icon name="arrow-left"></Icon>
-                                        </Button>
-                                        <input
-                                            type="text"
-                                            className="border-transparent form-focus-none form-control"
-                                            placeholder="Search by Order Id"
-                                            value={onSearchText}
-                                            onChange={() => onFilterChange()}
-                                        />
-                                        <Button className="search-submit btn-icon">
-                                            <Icon name="search"></Icon>
-                                        </Button>
-                                    </div>
-                                    <div className="form-inline flex-nowrap gx-3">
+                                    </ul>
+                                    <div className={`card-search search-wrap ${!onSearch && "active"}`}>
+                                        <div className="search-content">
+                                            <Button
+                                                onClick={() => {
+                                                    setSearchText("");
+                                                    toggle();
+                                                }}
+                                                className="search-back btn-icon toggle-search"
+                                            >
+                                                <Icon name="arrow-left"></Icon>
+                                            </Button>
+                                            <input
+                                                type="text"
+                                                className="border-transparent form-focus-none form-control"
+                                                placeholder="Search by Order Id"
+                                                value={onSearchText}
+                                                onChange={() => onFilterChange()}
+                                            />
+                                            <Button className="search-submit btn-icon">
+                                                <Icon name="search"></Icon>
+                                            </Button>
+                                        </div>
+                                        <div className="form-inline flex-nowrap gx-3">
+
+                                        </div>
 
                                     </div>
                                     
                                 </div>
-                                </div>
                             </div>
-                            </div>
-                            <DataTableBody compact>
+                        </div> */}
+                        <DataTableBody compact>
                             <DataTableHead>
 
                                 <DataTableRow>
@@ -291,6 +380,7 @@ const Kelas = () => {
                         </div>
                     </DataTable>
                 </Block>
+                <AddModal modal={modal.add} closeModal={closeModal}></AddModal>
             </Content>
         </React.Fragment>
     )
